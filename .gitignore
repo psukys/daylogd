@@ -35,3 +35,6 @@ coverage.xml
 
 # Translation
 *.mo
+
+# Exclude configuration file
+conf.json
