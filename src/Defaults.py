@@ -42,6 +42,7 @@ class Defaults:
 		fh.setLevel(level)
 		fh.setFormatter(formatter)
 		self.logger.addHandler(fh)
+		self.logger.info("Logger initiated")
 
 	def get_config(self):
 		"""
@@ -81,18 +82,7 @@ class Defaults:
 		Gets the project's settings directory
 		By default searches in 10 directories for Settings folder
 		"""
-		curr_dir = os.getcwd()
-		#use self.find_dir
-		while(search_dirs > 0 and not found):
-			#checks if it exists and is a directory
-			if os.path.isdir(os.path.join(curr_dir, "settings")):
-				found = True
-				return curr_dir
-			else:
-				for root, dirs, files in os.walk("."):
-					for d in dirs:
-						os.chdir
-
+		pass
 	def find_dir(self, curr_dir, dir_to_find, dirs_left):
 		if dirs_left == 0:
 			return None
