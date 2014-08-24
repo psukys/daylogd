@@ -38,3 +38,7 @@ coverage.xml
 
 # Exclude configuration file
 conf.json
+
+# Exclude logs
+log/
+*.log
