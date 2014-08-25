@@ -44,7 +44,7 @@ class Defaults:
 		self.logger.addHandler(fh)
 		self.logger.info("Logger initiated")
 
-	def get_config(self):
+	def get_main_config(self):
 		"""
 		Finds the main configuration
 		"""
@@ -65,13 +65,13 @@ class Defaults:
 		#be defined by user himself
 		pass
 
-	def set_logger_config_default(self):
+	def set_logger_config_default(self, fileName):
 		"""
 		Sets the logger configuration file with default values
 		"""
 		pass
 
-	def set_config_default(self):
+	def set_main_config_default(self, fileName):
 		"""
 		Sets the configuration file with default values
 		"""
@@ -83,6 +83,7 @@ class Defaults:
 		By default searches in 10 directories for Settings folder
 		"""
 		pass
+
 	def find_dir(self, curr_dir, dir_to_find, dirs_left):
 		if dirs_left == 0:
 			return None
