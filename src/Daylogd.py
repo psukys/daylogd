@@ -3,7 +3,7 @@ import subprocess
 import json
 import logging
 from datetime import date
-
+from Config import Config
 
 class Daylogd:
 	"""
@@ -12,8 +12,9 @@ class Daylogd:
 	"""
 
 	def __init__(self):
-		self.log_conf = None
-		self.logger = None
+		self.config = Config()
+		#TODO: tasks
+		self.logger = logging.getLogger(__name__)
 
 	def read_config(self):
 		"""
@@ -69,41 +70,6 @@ class Daylogd:
 		output = subprocess.check_output("xdg-mime query default text/plain ", shell=True)
 		query = output.replace(".desktop", "").strip() + " conf.json"
 		subprocess.Popen(query, shell=True).wait()
-
-	def setup_logger(self, level, log_format, logfolder=None):
-		"""
-		Sets up a logger instance.
-		If logfolder is specified logs are saved day wise
-		Args:
-			level: logging level
-			format: logging format
-			logfolder: optional - folder to save logs
-		"""
-		# TODO: initiate independent initialization process logger,
-		# update with setup_logger later. This is needed for full verbose mode
-		self.logger = logging.getLogger(__name__)
-		self.logger.setLevel(level)
-
-		#formatter
-		formatter = logging.Formatter(log_format)
-
-		#console handler
-		ch = logging.StreamHandler()
-		ch.setLevel(level)
-		ch.setFormatter(formatter)
-		self.logger.addHandler(ch)
-
-		#file handler
-		if logfolder:
-			#logfile for current day
-			logfile = date.strftime(date.today(), "%Y-%m-%d") + ".log"
-			#os.path.join for intelligent joining of paths
-			if not os.path.exists(logfolder):
-				os.makedirs(logfolder)
-			fh = logging.FileHandler(os.path.join(logfolder, logfile))
-			fh.setLevel(level)
-			fh.setFormatter(formatter)
-			self.logger.addHandler(fh)
 
 	def loop(self):
 		# index existing daylogs, search internet?
