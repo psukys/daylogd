@@ -5,6 +5,9 @@ import json
 class Config:
 
     """
+    The purpose of this class is to work with settings and configuration files
+    Primarily there's only conf.json, but the user might want to indicate
+    other settings files, which might come in hand for him
     """
 
     def __init__(self):
