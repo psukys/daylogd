@@ -66,3 +66,33 @@ class TestConfig(unittest.TestCase):
             self.created_dirs.append(settings_directory)
 
         self.assertEqual(test_object.get_settings_dir(), settings_directory)
+
+    def test_create_main_config_json_object(self):
+        """
+        Tests the creation of conf.json file
+        Test cases:
+        _1. Check if it is formattable JSON object_
+        2. Create conf.json in current directory
+        3. Create conf.json in parent dir
+        """
+        raise "Not implemented"
+
+    def test_create_main_config_current_directory(self):
+        """
+        Tests the creation of conf.json file
+        Test cases:
+        _1. Check if it is formattable JSON object_
+        2. Create conf.json in current directory
+        3. Create conf.json in parent dir
+        """
+        raise "Not implemented"
+
+    def test_create_main_config_parent_directory(self):
+        """
+        Tests the creation of conf.json file
+        Test cases:
+        _1. Check if it is formattable JSON object_
+        2. Create conf.json in current directory
+        3. Create conf.json in parent dir
+        """
+        raise "Not implemented"
