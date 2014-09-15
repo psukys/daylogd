@@ -1,6 +1,6 @@
 import os
 import json
-
+import logging
 
 class Config:
 
@@ -11,11 +11,19 @@ class Config:
     """
 
     def __init__(self):
-        pass
+        logging.basicConfig(filename=self.__class__.__name__+".log", level=logging.INFO)
+        logging.info("Logger initiated")
 
     def get_main_config(self):
-        with open(os.path.join(get_settings_dir(),
-                               "conf.json")) as file_stream:
+        """Returns main config in JSON object
+        """
+        conf_file = "conf.json"
+        conf_path = os.path.join(self.get_settings_dir(), conf_file)
+        if not os.path.isfile(conf_path):
+            logging.warning("conf.json not found in %s, initiating default one" % conf_path)
+            self.create_main_config()
+
+        with open(conf_path) as file_stream:
             json_data = json.load(file_stream)
         return json_data
 
@@ -40,9 +48,9 @@ class Config:
                              "%(asctime)s: %(topic)s\n %(message)s",
                              "datefmt": "%Y-%m-%d, %H:%M:%S"}}
         json.dump(config, open(
-            os.path.join(get_settings_dir,
+            os.path.join(self.get_settings_dir(),
                          "conf.json"), "w+"), indent=4, sort_keys=True)
-        return json.dump(config, fp=True)
+        return json.dumps(config)
 
     def get_settings_dir(self):
         """Gets the settings directory
@@ -64,6 +72,7 @@ class Config:
                 return os.path.normpath(os.path.join(current_directory, settings))
 
         # if nothing's found, use current directory
+        logging.info("Settings folder not found, creating in current directory")
         return_dir = os.path.dirname(os.path.realpath(__file__))
         os.mkdir(os.path.join(return_dir, settings))
         return os.path.join(return_dir, settings)
