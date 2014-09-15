@@ -33,7 +33,8 @@ def path_to_module(filename):
     return filename.replace(".py", "").replace("\\", ".").replace("/", ".")
 
 if __name__ == "__main__":
-    test_folder = "tests"
+    this_folder = os.path.dirname(__file__)
+    test_folder = os.path.join(this_folder, "tests")
     test_names = get_test_cases(test_folder)
     test_suites = [unittest.defaultTestLoader.loadTestsFromName(
         suite_name) for suite_name in test_names]
